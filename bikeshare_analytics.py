@@ -312,6 +312,13 @@ def display_raw_data(df, city):
             print("Please type yes or no.\n")
 
 def main():
+    """Run the main interaction loop for bikeshare_analytics
+
+        Args:
+            none
+        Returns:
+            nothing (in function printing only)
+    """
     while True:
         # load data according to filter criteria
         city, month, day, time_filter = get_filters()
