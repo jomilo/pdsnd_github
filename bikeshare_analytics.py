@@ -56,7 +56,7 @@ def get_filters():
             print("Enter one of these filter options: month, day, both or none")
 
     if(user_input == 'none'):
-        print("No time filter wil be applied for " + city + " data.")
+        print("No time filter wil be applied for {} data.".format(city.title()))
         month = 'all'
         day = 'all'
 
