@@ -11,8 +11,8 @@ CITY_DATA = { 'chicago': 'chicago.csv',
               'new york city': 'new_york_city.csv',
               'washington': 'washington.csv' }
 
-months = ['january', 'february', 'march', 'april', 'may', 'june']
-days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
+MONTHS_LIST = ['january', 'february', 'march', 'april', 'may', 'june']
+DAYS_LIST = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']
 
 def get_filters():
     """
@@ -66,7 +66,7 @@ def get_filters():
         while flag == True:
             month = input("Which month would you like to explore: e.g. March: ")
             month = month.lower()
-            if (month in months) or (month == 'all'):
+            if (month in MONTHS_LIST) or (month == 'all'):
                 flag = False
             else:
                 print("Enter a valifd month name: data available for January through June!")
@@ -77,7 +77,7 @@ def get_filters():
         while flag == True:
             day = input("Which day would you like to explore: e.g. Monday: ")
             day = day.lower()
-            if (day in days) or (day == 'all'):
+            if (day in DAYS_LIST) or (day == 'all'):
                 flag = False
             else:
                 print("Enter a valifd day name!")
@@ -118,8 +118,8 @@ def load_data(city, month, day):
         print ("Will not do time filtering")
     else:
         if (month != 'all'):
-            # use the index of the months list to get the corresponding int
-            month = months.index(month) + 1
+            # use the index of the MONTHS_LIST list to get the corresponding int
+            month = MONTHS_LIST.index(month) + 1
             # filter by month to create the new dataframe
             df = df[df['month'] == month]
 
@@ -146,7 +146,7 @@ def time_stats(df, time_filter):
 
     # display the most common month
     popular_month = df['month'].mode()[0]
-    month_name = months[popular_month - 1].title()
+    month_name = MONTHS_LIST[popular_month - 1].title()
     print("Most popular month was: {} ".format(month_name), "(with time filter: {})".format(time_filter))
 
     # display the most common day of week
@@ -215,14 +215,14 @@ def trip_duration_stats(df, time_filter):
     total_travel_time_secs = df['Trip Duration'].sum().item()
     print("Total travel time [seconds]: {}".format(total_travel_time_secs), "(with time filter: {})".format(time_filter))
     total_travel_time_dt = datetime.timedelta(seconds=total_travel_time_secs)
-    print("Total travel time [days, hours:mins:secs]: {}".format(total_travel_time_dt), "(with time filter: {})".format(time_filter))
+    print("Total travel time [DAYS_LIST, hours:mins:secs]: {}".format(total_travel_time_dt), "(with time filter: {})".format(time_filter))
 
 
     # display mean travel time
     mean_travel_time_secs = int(df['Trip Duration'].mean())
     print("Mean travel time [seconds]: {}".format(mean_travel_time_secs), "(with time filter: {})".format(time_filter))
     mean_travel_time_dt = datetime.timedelta(seconds=mean_travel_time_secs)
-    print("Mean travel time [days, hours:mins:secs]: {}".format(mean_travel_time_dt), "(with time filter: {})".format(time_filter))
+    print("Mean travel time [DAYS_LIST, hours:mins:secs]: {}".format(mean_travel_time_dt), "(with time filter: {})".format(time_filter))
 
     print("\nThis took %s seconds." % (time.time() - start_time))
     print('-'*40)
@@ -335,7 +335,6 @@ def main():
                 flag = False
             elif restart.lower() == 'no':
                 print('\n')
-#                print("Thanks for visiting Bikeshare Analytics. Hope to see you soon!")
                 print('   __O ', '   ' , '   __O ', '   ' ,'   __O ')
                 print(' _ \<_  ', '  ' , ' _ \<_  ', '  ' , ' _ \<_  ')
                 print('(_)/(_)', '   ' , '(_)/(_)', '   ' , '(_)/(_)')
